@@ -1,0 +1,43 @@
+ {%extends 'layout.html'%} {%block content%} {%for content in contents%}
+<div class="listBox">
+    <h1>{{content.title}}</h1>
+    <p class="colDefault">
+        auther：<span class="colInfo">{{content.user.username}}</span> - time：
+        <span class="colInfo">{{content.addtime|date('Y-m-d H:i:s')}}</span> - view：
+        <span class="colInfo">{{content.views}}</span> - comment：
+        <span class="colInfo">{{content.comments.length}}</span>
+    </p>
+    <dfn><p>{{content.description}}</p></dfn>
+    <div class="function"><a href="/view?contentid={{content.id}}">view full article</a></div>
+</div>
+{%endfor%}
+
+<div class="pager">
+    <ul class="clear">
+
+        <li class="previous">
+
+            {%if page
+            <=1 %} <span>no previous page</span>
+                {%else%}
+                <a href="/?category={{category}}&page={{page-1}}">previous page</a> {%endif%}
+
+        </li>
+
+        {%if pages > 0%}
+        <li>
+            <strong>{{page}} / {{pages}}</strong>
+        </li>
+        {%endif%}
+
+        <li class="next">
+
+            {%if page >= pages%}
+            <span>no next page</span> {%else%}
+            <a href="/?category={{category}}&page={{page+1}}">next page</a> {%endif%}
+
+        </li>
+
+    </ul>
+</div>
+{%endblock%}
